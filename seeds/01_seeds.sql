@@ -21,7 +21,7 @@ VALUES
 -- SEEDS FOR PROPERTIES
 -- ///////////////////////
 
-INSERT INTO properties (owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, parking_spaces, number_of_bathroom, number_of_bedrooms, country, street, city, province, post_code, active) 
+INSERT INTO properties (owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, parking_spaces, number_of_bathrooms, number_of_bedrooms, country, street, city, province, post_code, active) 
 VALUES
 (1, 'Crimson Pinnacle Point', 'description', 'http://lorempixel.com/400/200', 'http://lorempixel.com/400/200', 30, 1, 1, 2, 'Canada', '1600 St Urbain St', 'Montreal', 'Quebec', 'H2X 1Z8', 'yes'),
 (2, 'Exalted Beach Refuge', 'description', 'http://lorempixel.com/400/200', 'http://lorempixel.com/400/200', 60, 2, 2, 4, 'Canada', '1600 St Urbain St', 'Montreal', 'Quebec', 'H2X 1Z8', 'yes'),
@@ -40,26 +40,26 @@ VALUES
 -- SEEDS FOR RESERVATIONS
 -- ///////////////////////
 
-INSERT INTO reservations (guest_id, property_id, start_date, end_date) 
+INSERT INTO reservations (start_date, end_date, property_id, guest_id) 
 VALUES
-(1, 1, '2018-09-11', '2018-09-26'),
-(2, 2, '2019-01-04', '2019-02-01'),
-(3, 3, '2021-10-01', '2021-10-14'),
-(4, 4, '2018-09-11', '2018-09-26'),
-(5, 5, '2019-01-04', '2019-02-01'),
-(6, 6, '2021-10-01', '2021-10-14'),
-(7, 7, '2018-09-11', '2018-09-26'),
-(8, 8, '2019-01-04', '2019-02-01'),
-(9, 9, '2021-10-01', '2021-10-14'),
-(10, 10, '2021-10-01', '2021-10-14');
+('2018-09-11', '2018-09-26', 1, 1),
+('2019-01-04', '2019-02-01', 2, 2),
+('2021-10-01', '2021-10-14', 3, 3),
+('2018-09-11', '2018-09-26', 4, 4),
+('2019-01-04', '2019-02-01', 5, 5),
+('2021-10-01', '2021-10-14', 6, 6),
+('2018-09-11', '2018-09-26', 7, 7),
+('2019-01-04', '2019-02-01', 8, 8),
+('2021-10-01', '2021-10-14', 9, 9),
+('2021-10-01', '2021-10-14', 10, 10);
 
 
 
 -- /////////////////////////
--- SEEDS FOR RESERVATIONS
+-- SEEDS FOR PROPERTIES REVIEWS
 -- ///////////////////////
 
-INSERT INTO reservations (guest_id, property_id, reservation_id, rating, message) 
+INSERT INTO property_reviews (guest_id, property_id, reservation_id, rating, message) 
 VALUES
 (2, 5, 10, 3,'message'),
 (1, 4, 1, 5,'message'),
@@ -70,4 +70,4 @@ VALUES
 (5, 6, 3, 2,'message'),
 (7, 10, 8, 4,'message'),
 (6, 9, 9, 3,'message'),
-(10, 7, 6, 'message');
+(10, 7, 6, 4,'message');
