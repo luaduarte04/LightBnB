@@ -1,6 +1,6 @@
 SELECT properties.city, COUNT(reservations) AS total_reservations
 FROM reservations
-INNER JOIN properties ON properties_id = properties.id
+INNER JOIN properties ON property_id = properties.id
 GROUP BY properties.city
 ORDER BY total_reservations DESC;
 
