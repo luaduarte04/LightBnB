@@ -64,16 +64,6 @@ const addUser =  function(user) {
     //console.log(res);
     return res.rows[0];
   });
-
-  // Accepts a user object that will have a name, email, and hashed password property.
-  // This function should insert the new user into the database.
-  // It will return a promise that resolves with the new user object. This object should contain the user's id after it's been added to the database.
-  // Add RETURNING *; to the end of an INSERT query to return the objects that were inserted. This is handy when you need the auto generated id of an object you've just added to the database.
-
-  // const userId = Object.keys(users).length + 1;
-  // user.id = userId;
-  // users[userId] = user;
-  // return Promise.resolve(user);
 }
 exports.addUser = addUser;
 
@@ -85,7 +75,21 @@ exports.addUser = addUser;
  * @return {Promise<[{}]>} A promise to the reservations.
  */
 const getAllReservations = function(guest_id, limit = 10) {
-  return getAllProperties(null, 2);
+  return pool.query(`
+  SELECT properties.*, reservations.*, AVG(property_reviews.rating) AS average_rating
+  FROM reservations
+  INNER JOIN properties ON reservations.property_id = properties.id
+  INNER JOIN property_reviews ON properties.id = property_reviews.property_id
+  WHERE reservations.guest_id = $1
+  AND reservations.end_date < now()::date
+  GROUP BY properties.id, reservations.id
+  ORDER BY reservations.start_date
+  LIMIT $2;
+  `, [guest_id, limit = 10])
+  .then(res => {
+    return res.rows;
+  });
+  // This function accepts a guest_id, limits the properties to 10 and returns a promise. The promise should resolve reservations for that user. Use the All My Reservations query that you made in a previous assignments.
 }
 exports.getAllReservations = getAllReservations;
 
